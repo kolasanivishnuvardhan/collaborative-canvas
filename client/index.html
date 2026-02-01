@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Drawing Canvas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header with title and online users -->
+        <header class="header">
+            <h1>🎨 Collaborative Drawing Canvas</h1>
+            <div class="users-container">
+                <span class="users-label">Online Users:</span>
+                <div id="onlineUsers" class="online-users"></div>
+            </div>
+        </header>
+
+        <!-- Toolbar with drawing controls -->
+        <div class="toolbar">
+            <div class="tool-group">
+                <label>Tool:</label>
+                <button id="brushBtn" class="tool-btn active" title="Brush">
+                    <span>✏️</span>
+                </button>
+                <button id="eraserBtn" class="tool-btn" title="Eraser">
+                    <span>🧹</span>
+                </button>
+            </div>
+
+            <div class="tool-group">
+                <label for="colorPicker">Color:</label>
+                <input type="color" id="colorPicker" value="#000000">
+            </div>
+
+            <div class="tool-group">
+                <label for="strokeWidth">Width: <span id="strokeWidthValue">3</span>px</label>
+                <input type="range" id="strokeWidth" min="1" max="50" value="3">
+            </div>
+
+            <div class="tool-group">
+                <button id="undoBtn" class="action-btn" title="Undo (Ctrl+Z)">
+                    ↶ Undo <span id="undoCount" class="count-badge">0</span>
+                </button>
+                <button id="redoBtn" class="action-btn" title="Redo (Ctrl+Y)">
+                    ↷ Redo <span id="redoCount" class="count-badge">0</span>
+                </button>
+            </div>
+
+            <div class="tool-group">
+                <button id="clearBtn" class="action-btn danger" title="Clear Canvas">
+                    🗑️ Clear
+                </button>
+            </div>
+        </div>
+
+        <!-- Canvas container -->
+        <div class="canvas-container">
+            <canvas id="drawingCanvas"></canvas>
+            <div id="cursors" class="cursors-overlay"></div>
+        </div>
+
+        <!-- Status bar -->
+        <div class="status-bar">
+            <span id="connectionStatus" class="status-indicator">🔴 Disconnected</span>
+            <span id="canvasInfo">Canvas: 0 x 0</span>
+            <span id="latencyInfo">Latency: --ms</span>
+        </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="canvas.js"></script>
+    <script src="websocket.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

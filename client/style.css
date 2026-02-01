@@ -1,0 +1,349 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    max-width: 1400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.users-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.users-label {
+    font-weight: 500;
+}
+
+.online-users {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.user-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(10px);
+}
+
+.user-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+/* Toolbar */
+.toolbar {
+    background: #f8f9fa;
+    padding: 15px 30px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.tool-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tool-group label {
+    font-weight: 500;
+    color: #495057;
+    font-size: 14px;
+}
+
+.tool-btn {
+    padding: 10px 15px;
+    border: 2px solid #dee2e6;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.2s;
+}
+
+.tool-btn:hover {
+    border-color: #667eea;
+    transform: translateY(-2px);
+}
+
+.tool-btn.active {
+    background: #667eea;
+    border-color: #667eea;
+    color: white;
+}
+
+.action-btn {
+    padding: 8px 16px;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.action-btn:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.action-btn.danger {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.action-btn.danger:hover {
+    background: #dc3545;
+    color: white;
+}
+
+.action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: #dee2e6;
+    color: #6c757d;
+}
+
+.action-btn:disabled:hover {
+    background: white;
+    color: #6c757d;
+    transform: none;
+}
+
+.count-badge {
+    background: rgba(102, 126, 234, 0.2);
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 11px;
+    margin-left: 4px;
+}
+
+#colorPicker {
+    width: 50px;
+    height: 35px;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#strokeWidth {
+    width: 120px;
+    cursor: pointer;
+}
+
+/* Canvas container */
+.canvas-container {
+    flex: 1;
+    position: relative;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#drawingCanvas {
+    display: block;
+    cursor: crosshair;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Cursors overlay */
+.cursors-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.remote-cursor {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    pointer-events: none;
+    transition: transform 0.05s linear;
+    z-index: 1000;
+}
+
+.remote-cursor::after {
+    content: attr(data-user);
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+/* Status bar */
+.status-bar {
+    background: #f8f9fa;
+    padding: 12px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid #e9ecef;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.status-indicator.connected {
+    color: #28a745;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        height: 95vh;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .toolbar {
+        padding: 10px 15px;
+        gap: 10px;
+    }
+
+    .canvas-container {
+        margin: 10px;
+    }
+
+    .status-bar {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+}
+
+/* Toast notifications */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease-out;
+    min-width: 250px;
+    max-width: 400px;
+}
+
+.toast.success {
+    background: rgba(40, 167, 69, 0.95);
+}
+
+.toast.info {
+    background: rgba(102, 126, 234, 0.95);
+}
+
+.toast.warning {
+    background: rgba(255, 193, 7, 0.95);
+}
+
+.toast.error {
+    background: rgba(220, 53, 69, 0.95);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
