@@ -15,8 +15,21 @@ const io = socketIo(server);
 
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from client directory
-app.use(express.static(path.join(__dirname, '../client')));
+// Serve static files from client directory with proper MIME types
+app.use(express.static(path.join(__dirname, '../client'), {
+    setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.js')) {
+            res.setHeader('Content-Type', 'application/javascript');
+        } else if (filePath.endsWith('.css')) {
+            res.setHeader('Content-Type', 'text/css');
+        }
+    }
+}));
+
+// Fallback route to serve index.html for root path
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/index.html'));
+});
 
 // Initialize room manager
 const roomManager = new RoomManager();
